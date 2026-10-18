@@ -25,6 +25,7 @@ public class UserController {
 
     // ===== READ endpoints return DTOs =====
 
+    @CrossOrigin(origins = {"http://example.com", "http://localhost"})
     @GetMapping
     public List<UserDTO> getAllUsers() {
         return userService.findAll();

@@ -19,19 +19,23 @@ public class User {
     @Column(nullable = false, unique = true)
     private String username;
 
-    @Column(nullable = false)
-    private String password;
-
     @ManyToMany(mappedBy = "users")
     private Set<Task> tasks;
+
+    @Column(nullable = false)
+    private String salt;
+
+    @Column(name = "password_hash", nullable = false)
+    private String passwordHash;
 
     // Constructors
     public User() {}
 
     public User(String username, String password) {
         this.username = username;
-        this.password = password;
+        this.passwordHash = password;
     }
+
 
     // Getters & setters
     public Integer getId() { return id; }
@@ -40,9 +44,13 @@ public class User {
     public String getUsername() { return username; }
     public void setUsername(String username) { this.username = username; }
 
-    public String getPassword() { return password; }
-    public void setPassword(String password) { this.password = password; }
+    public String getPassword() { return passwordHash; }
+    public void setPassword(String password) { this.passwordHash = password; }
+    
 
     public Set<Task> getTasks() { return tasks; }
     public void setTasks(Set<Task> tasks) { this.tasks = tasks; }
+
+    public void setSalt(String salt) { this.salt = salt; }
+    public void setPasswordHash(String passwordHash) { this.passwordHash = passwordHash; }
 }
